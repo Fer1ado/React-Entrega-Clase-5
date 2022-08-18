@@ -1,6 +1,7 @@
 import './CartWidget.css'
 import { useContext } from 'react'
 import  Contexto from '../ContextoCarrito/ContextoCarrito'
+import { Link } from 'react-router-dom'
 
 const CartWidget = () => {
     const {calcularCantidad} = useContext(Contexto)
@@ -8,7 +9,7 @@ const CartWidget = () => {
     const valor = calcularCantidad()
 
     return (
-        <li><a href="#"><i className="material-icons">shopping_cart</i></a><h6 className="contador">{valor}</h6></li>
+        <Link to="/carrito"><i className="material-icons">shopping_cart</i>{valor === 0 ? null : <h6 className="contador">{valor}</h6>}</Link>
     )
 }
 
