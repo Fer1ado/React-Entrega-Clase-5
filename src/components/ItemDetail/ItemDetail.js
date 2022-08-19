@@ -2,7 +2,7 @@ import Counter from "../Counter/Counter"
 import "./ItemDetail.css"
 import {useState} from "react"
 import { useContext } from "react"
-import Contexto from "../ContextoCarrito/ContextoCarrito"
+import Contexto from "../../ContextoCarrito/ContextoCarrito"
 import {Link} from "react-router-dom"
 
 const ItemDetail = ({name, imagen, descripcion, stock, id, precio}) => {

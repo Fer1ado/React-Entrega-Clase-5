@@ -2,32 +2,49 @@ import { useEffect, useState } from "react"
 import {getProductById} from "../../asyncMock"
 import ItemDetail from "../ItemDetail/ItemDetail"
 import { useParams} from "react-router-dom"
+import { getDoc, doc,  } from "firebase/firestore"
+import { BaDat } from "../../Services/firebase/firebaseindex"
 
 const ItemDetailContainer = () => {
     const [producto, setProducto] = useState()
-
+    const [loading, setLoading] = useState(true)
     const {IdProducto} = useParams()
 
 
-    useEffect(()=>{
-        getProductById(IdProducto)
-        .then(res => {
-            setProducto(res)
+    useEffect(() => {
+        setLoading(true)
 
-            
-    })
-    .catch(error =>{
+    getDoc(doc(BaDat, "producto", IdProducto)).then(response => {
+      
+        const data = response.data()
+        console.log(data)
+        const ajusteProductos = { id: response.id, ...data}
+        setProducto(ajusteProductos)
+    
+    }).catch(error=>{
         console.log(error)
-    })
-},[])
+    }).finally(()=>setLoading(false))
+
+    //     getProductById(IdProducto)
+    //     .then(res => {
+    //         setProducto(res)
+    //         console.log(res)
+    // })
+    // .catch(error =>{
+    //     console.log(error)
+
+},[IdProducto])
+
+
+
 
 return (
     <div>
-        <ItemDetail name={producto?.fields.nombre} 
-        imagen={producto?.fields.image.fields.file.url} 
-        descripcion={producto?.fields.descripcion} 
-        stock={producto?.fields.stock}
-        id={producto?.sys.id} precio={producto?.fields.importe}/>
+        <ItemDetail name={producto?.nombre} 
+        imagen={producto?.imagen} 
+        descripcion={producto?.descripcion} 
+        stock={producto?.stock}
+        id={producto?.id} precio={producto?.importe}/>
         
     </div>
     )

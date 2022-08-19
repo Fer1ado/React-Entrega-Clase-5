@@ -5,7 +5,7 @@ import Navbar from './components/Navbar/Navbar';
 import ItemListContainer from './components/ItemListContainer/ItemListContainer';
 import ItemDetailContainer from "./components/ItemDetailContainer/ItemDetailContainer"
 import {BrowserRouter, Routes, Route} from "react-router-dom"
-import { ContextoCarrito } from './components/ContextoCarrito/ContextoCarrito';
+import { ContextoCarrito } from './ContextoCarrito/ContextoCarrito';
 import Carrito from './components/Carrito/Carrito';
 
 
