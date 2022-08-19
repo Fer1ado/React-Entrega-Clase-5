@@ -27,18 +27,6 @@ const ItemListContainer = ({greeting}) => {
         setProducts(ajusteProductos)
     }).catch(error => console.log(error)).finally(() => {setLoading(false)})
     
-
-
-        // if(!IdCategoria){
-        //     getProducts().then(products => {
-        //        setProducts(products)  })
-
-        //      } else {
-        //     getProductByCategory(IdCategoria).then(products => {
-        //         setProducts(products)
-        // })
-        // }
-
     },[IdCategoria])
 
 
@@ -47,8 +35,23 @@ const ItemListContainer = ({greeting}) => {
         <>
     
         <h1>{greeting}</h1>
-        <ItemList products={products}/>
-    
+        {loading === true ? 
+                        <div>
+                            <div className="preloader-wrapper big active">
+                                <div className="spinner-layer spinner-purple">
+                                <div className="circle-clipper left">
+                                    <div className="circle"></div>
+                                </div><div className="gap-patch">
+                                    <div className="circle"></div>
+                                </div><div className="circle-clipper right">
+                                    <div className="circle"></div>
+                                </div>
+                                </div>
+                            </div> 
+                            <h2>Cargando...</h2>
+                        </div>
+        :   <ItemList products={products}/>
+        } 
         </>
     )
 }

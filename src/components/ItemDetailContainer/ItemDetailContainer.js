@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import {getProductById} from "../../asyncMock"
 import ItemDetail from "../ItemDetail/ItemDetail"
 import { useParams} from "react-router-dom"
-import { getDoc, doc,  } from "firebase/firestore"
+import { getDoc, doc } from "firebase/firestore"
 import { BaDat } from "../../Services/firebase/firebaseindex"
 
 const ItemDetailContainer = () => {
@@ -14,24 +14,18 @@ const ItemDetailContainer = () => {
     useEffect(() => {
         setLoading(true)
 
-    getDoc(doc(BaDat, "producto", IdProducto)).then(response => {
+    getDoc(doc(BaDat, "Zima-Catalogo", IdProducto)).then(response => {
       
         const data = response.data()
         console.log(data)
         const ajusteProductos = { id: response.id, ...data}
         setProducto(ajusteProductos)
-    
-    }).catch(error=>{
+        })
+    .catch(error=>{
         console.log(error)
-    }).finally(()=>setLoading(false))
+    })
+    .finally(()=>setLoading(false))
 
-    //     getProductById(IdProducto)
-    //     .then(res => {
-    //         setProducto(res)
-    //         console.log(res)
-    // })
-    // .catch(error =>{
-    //     console.log(error)
 
 },[IdProducto])
 
@@ -39,6 +33,7 @@ const ItemDetailContainer = () => {
 
 
 return (
+    
     <div>
         <ItemDetail name={producto?.nombre} 
         imagen={producto?.imagen} 
